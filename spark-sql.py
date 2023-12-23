@@ -10,10 +10,10 @@ def mapper(line):
                age=int(fields[2]), numFriends=int(fields[3]))
 
 lines = spark.sparkContext.textFile("fakefriends.csv")
-people = lines.map(mapper)
+people = lines.map(mapper) # turn the rdd of lines into rdd of row objects
 
 # Infer the schema, and register the DataFrame as a table.
-schemaPeople = spark.createDataFrame(people).cache()
+schemaPeople = spark.createDataFrame(people).cache() # we're caching it beacuse we are going to run queries on it
 schemaPeople.createOrReplaceTempView("people")
 
 # SQL can be run over DataFrames that have been registered as a table.

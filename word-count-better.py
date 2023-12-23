@@ -5,10 +5,10 @@ def normalizeWords(text):
     return re.compile(r'\W+', re.UNICODE).split(text.lower())
 
 conf = SparkConf().setMaster("local").setAppName("WordCount")
-conf.set("spark.local.dir", "/spark/path/to/temporary/directory") # this is needed so that we won't have ERROR ShutdownHookManager
+#conf.set("spark.local.dir", "/spark/path/to/temporary/directory") # this is needed so that we won't have ERROR ShutdownHookManager
 sc = SparkContext(conf = conf)
 
-input = sc.textFile("file:///Sparkcourse(TamingBigData)/Book.txt")
+input = sc.textFile("file:///home/egesaygili/SparkCourse/Book.txt")
 words = input.flatMap(normalizeWords)
 wordCounts = words.countByValue()
 

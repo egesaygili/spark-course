@@ -1,6 +1,6 @@
 from pyspark import SparkConf, SparkContext
 
-conf = SparkConf().setMaster("local").setAppName("MinTemperatures")
+conf = SparkConf().setMaster("local").setAppName("CustomerOrders")
 #conf.set("spark.local.dir", "/path/to/temporary/directory") # this is needed so that we won't have ERROR ShutdownHookManager
 sc = SparkContext(conf = conf)
 

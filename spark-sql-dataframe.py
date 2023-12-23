@@ -2,6 +2,7 @@ from pyspark.sql import SparkSession
 
 spark = SparkSession.builder.appName("SparkSQL").getOrCreate()
 
+# automatically creates the dataframe
 people = spark.read.option("header", "true").option("inferSchema", "true")\
     .csv("file:///home/egesaygili/SparkCourse/fakefriends-header.csv")
     

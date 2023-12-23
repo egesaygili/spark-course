@@ -12,7 +12,6 @@ import codecs
 
 def loadMovieNames():
     movieNames = {}
-    # CHANGE THIS TO THE PATH TO YOUR u.ITEM FILE:
     with codecs.open("/home/egesaygili/SparkCourse/ml-100k/u.item", "r", encoding='ISO-8859-1', errors='ignore') as f:
         for line in f:
             fields = line.split('|')
@@ -21,6 +20,7 @@ def loadMovieNames():
 
 spark = SparkSession.builder.appName("PopularMovies").getOrCreate()
 
+# nameDict is the broadcasted object
 nameDict = spark.sparkContext.broadcast(loadMovieNames())
 
 # Create schema when reading u.data

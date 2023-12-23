@@ -25,9 +25,11 @@ minTempsByStation = stationTemps.groupBy("stationID").min("temperature")
 minTempsByStation.show()
 
 # Convert temperature to fahrenheit and sort the dataset
+# withColumn creates a new column
 minTempsByStationF = minTempsByStation.withColumn("temperature",
                                                   func.round(func.col("min(temperature)") * 0.1 * (9.0 / 5.0) + 32.0, 2))\
-                                                  .select("stationID", "temperature").sort("temperature")
+                                                  .select("stationID", "temperature").sort("temperature") 
+                                                # if you dont use select here the new temperature values wont appear
 # withColumn creates a new column in the DF
                                                   
 # Collect, format, and print the results

@@ -13,9 +13,9 @@ def parseLine(line):
 
 lines = sc.textFile("file:///home/egesaygili/SparkCourse/1800.csv")
 parsedLines = lines.map(parseLine)
-minTemps = parsedLines.filter(lambda x: "TMAX" in x[1])
+minTemps = parsedLines.filter(lambda x: "TMAX" in x[1]) #filter with a boolean expression
 stationTemps = minTemps.map(lambda x: (x[0], x[2]))
-minTemps = stationTemps.reduceByKey(lambda x, y: max(x,y))
+minTemps = stationTemps.reduceByKey(lambda x, y: max(x,y)) # here, x and y corresponds to values from different rows
 results = minTemps.collect();
 
 for result in results:

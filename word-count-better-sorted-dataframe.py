@@ -5,9 +5,11 @@ spark = SparkSession.builder.appName("WordCount").getOrCreate()
 
 # Read each line of my book into a dataframe
 inputDF = spark.read.text("file:///home/egesaygili/SparkCourse/Book.txt")
+#inputDF.show()
 
 # Split using a regular expression that extracts words
-words = inputDF.select(func.explode(func.split(inputDF.value, "\\W+")).alias("word")) # value is the default column name
+# the column will be called "value" by default
+words = inputDF.select(func.explode(func.split(inputDF.value, "\\W+")).alias("word")) # alias is in select function
 wordsWithoutEmptyString = words.filter(words.word != "")
 
 # Normalize everything to lowercase
@@ -16,7 +18,7 @@ lowercaseWords = wordsWithoutEmptyString.select(func.lower(wordsWithoutEmptyStri
 # Count up the occurrences of each word
 wordCounts = lowercaseWords.groupBy("word").count()
 
-# Sort by counts
+# Sort by counts, the column name will ve "count" by default
 wordCountsSorted = wordCounts.sort("count")
 
 # Show the results.
